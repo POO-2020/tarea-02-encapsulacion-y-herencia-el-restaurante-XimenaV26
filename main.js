@@ -1,4 +1,4 @@
-import Restaurante from './resturante.js';
+import Restaurante from './restaurante.js';
 import Producto from './producto.js';
 import Precio from './precio.js';
 import ElementoPedido from './elemento-pedido.js';
