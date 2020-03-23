@@ -3,7 +3,7 @@ import Fecha from './fecha.js';
 import Cliente from './cliente.js';
 import ElementoPedido from './elemento-pedido.js';
 import Precio from './precio.js';
-
+//ya no poodia hacer push otravez ;c
 export default class Pedido {
   /**
    *
