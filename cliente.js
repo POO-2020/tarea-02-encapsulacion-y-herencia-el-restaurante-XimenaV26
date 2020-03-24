@@ -11,6 +11,18 @@ export default class Cliente {
       this._nombre = nombre;
       this._telefono = telefono;
     }
+
+    getNombre(){
+      return(`${this._nombre}`)
+    }
+
+    getDireccion(){
+      return (`${this._direccion}`)
+    }
+
+    getTele(){
+      return (`${this._telefono}`)
+    }
   
     getPerfil() {
       let perfil = `${this._nombre}, ${

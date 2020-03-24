@@ -45,6 +45,9 @@ class Main {
       cliente: this.cliente
     }
     this.pedido = new Pedido(ped_1)
+    this.pedido.agregarElemento(this.elemento);
+    this.pedido.agregarElemento(this.elemento2);
+    this.pedido.agregarElemento(this.elemento3);
   }
 
   probarFecha() {

@@ -30,7 +30,7 @@ export default class Fecha {
     getFecha() {
       return `${this._fecha.getDate()}/${
         nombreMes[this._fecha.getMonth()]
-      }/${this.fecha.getFullYear()}`;
+      }/${this._fecha.getFullYear()}`;
     }
   
     getDiaFecha() {

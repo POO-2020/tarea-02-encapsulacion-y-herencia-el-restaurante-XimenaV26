@@ -24,9 +24,8 @@ export default class Pedido {
   }
 
   getResumen() {
-    return `${this.numeroPedido}, ${this._fecha.getFecha()} ${this._hora.getFormato12()} - ${this.getNumeroElementos()} elementos con ${this.getNumeroProductos()} productos - total: ${new Precio(
-      this.getCostoTotal()
-    ).getPrecio()} `;
+    return `${this._numeroPedido}, ${this._fecha.getFecha()} ${this._hora.getFormato12()} - ${this.getNumeroElementos()} elementos con ${this.getNumeroProductos()} productos - total: ${new Precio(
+      this.getCostoTotal()).getPrecio()} `;
   }
 
   getNumeroElementos() {
@@ -37,7 +36,7 @@ export default class Pedido {
     let totalProductos = 0;
 
     this.elementosPedidos.forEach(elemento => {
-      totalProductos = totalProductos + elemento.cantidad;
+      totalProductos = totalProductos + elemento._cantidad;
     });
 
     return totalProductos;
@@ -48,7 +47,7 @@ export default class Pedido {
 
     this.elementosPedidos.forEach(elemento => {
       costoTotal =
-        costoTotal + elemento.cantidad * elemento.producto.precio.valor;
+        costoTotal + elemento._cantidad * elemento._producto._precio._valor;
     });
 
     return costoTotal;
