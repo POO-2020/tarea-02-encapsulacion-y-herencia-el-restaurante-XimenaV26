@@ -7,10 +7,12 @@ import Fecha from './fecha.js';
 import Tiempo from './tiempo.js';
 import Cliente from './cliente.js';
 import Direccion from './direccion.js';
+import ClienteF from './cliente-frecuente.js';
 
 class Main {
   constructor() {
     this.fecha = new Fecha(15, 6, 2005);
+    this.fecha2 = new Fecha(24, 3, 2018);
 
     this.tiempo1 = new Tiempo({ hora: 10, minuto: 25, periodo: 'am' });
     this.tiempo2 = new Tiempo({ hora: 10, minuto: 25, periodo: 'pm' });
@@ -23,6 +25,7 @@ class Main {
       28040,
       'Colima',
       'Colima'
+
     );
 
     this.precio = new Precio(2500.5);
@@ -32,22 +35,48 @@ class Main {
     this.elemento2 = new ElementoPedido(1, this.producto);
     this.elemento3 = new ElementoPedido(3, this.producto);
 
-    this.cliente = new Cliente('Juan Pérez Díaz', this.direccion, 3124563256);
+    this.cliente = new Cliente('Ximena Velasco Godinez', this.direccion, 3124563256);
+    this.cliente2 = new Cliente("Luna Exposito Medrano", this.direccion, 3126543789); 
+    this.cliente3 = new Cliente("Marina Flores Casas", this.direccion, 31256473843);
 
-    /**this.pedido = new Pedido(this.fecha, this.tiempo1, this.cliente);
-    this.pedido.agregarElemento(this.elemento);
-    this.pedido.agregarElemento(this.elemento2);
-    this.pedido.agregarElemento(this.elemento3);**/
     let ped_1 = {
       numeroPedido: 208,
       fecha: this.fecha,
       hora: this.tiempo1,
       cliente: this.cliente
     }
+
+    let ped_2 = {
+      numeroPedido: 309,
+      fecha: this.fecha,
+      hora: this.tiempo2,
+      cliente: this.cliente2
+    }
+
+    let ped_3 = {
+      numeroPedido: 342,
+      fecha: this.fecha,
+      hora: this.tiempo2,
+      cliente: this.cliente3
+    }
+    
     this.pedido = new Pedido(ped_1)
+    this.pedido2 = new Pedido(ped_2)
+    this.pedido3 = new Pedido(ped_3)
     this.pedido.agregarElemento(this.elemento);
-    this.pedido.agregarElemento(this.elemento2);
-    this.pedido.agregarElemento(this.elemento3);
+    this.pedido2.agregarElemento(this.elemento2);
+    this.pedido3.agregarElemento(this.elemento3);
+    this.pedido3.agregarElemento(this.elemento);
+
+    let cf_1 ={
+      nombre: "Clear Castillo Rivera",
+      direccion: this.direccion,
+      telefono: 3124539865,
+      numeroCliente: 22,
+      fechaRegistro: this.fecha2
+    }
+    this.clienteFre = new ClienteF(cf_1)
+
   }
 
   probarFecha() {
@@ -89,15 +118,36 @@ class Main {
 
   probarPedido() {
     console.log(this.pedido.getResumen());
-    console.log(this.pedido.getNumeroElementos());
-    console.log(this.pedido.getNumeroProductos());
+    console.log(this.pedido2.getNumeroElementos());
+    console.log(this.pedido3.getNumeroProductos());
     console.log(this.pedido.getCostoTotal());
-    this.pedido.listarElementos();
+    this.pedido2.listarElementos();
+  }
+  probarRestaurante(){
+    let r_1 = {
+      nombre: "La Ben DeLa Crem",
+      telefono: 3126754,
+      direccion: "Av. Enrique Segoviano #8"
+    }
+    this.restaurant = new Restaurante(r_1)
+
+    console.log(this.restaurant.registrarPedido(this.pedido));
+    console.log(this.restaurant.registrarPedido(this.pedido2));
+    console.log(this.restaurant.registrarPedido(this.pedido3));
+    this.restaurant.listarPedido();
+    console.log(this.restaurant.eliminarPedido(this.pedido2));
+    this.restaurant.listarPedido();
+    this.restaurant.actualizarPedido(this.pedido, this.pedido3);
+    this.restaurant.listarPedido();
+  }
+  probarClienteF(){
+    console.log(this.clienteFre.getPerfil())
   }
 }
 
 let app = new Main();
-
+app.probarClienteF();
+app.probarRestaurante();
 app.probarFecha();
 app.probarTiempo();
 app.probarDireccion();

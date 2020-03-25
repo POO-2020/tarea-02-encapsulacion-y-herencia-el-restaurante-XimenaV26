@@ -15,35 +15,68 @@ export default class Restaurante {
     this._nombre = nombre;
     this._telefono = telefono;
     this._dirección = dirección;
-    this.productos = new Array();
-    this.pedidos = new Array();
+    this._productos = new Array();
+    this._pedidos = new Array();
+  }
+
+  registrarPedido(pedido){
+    if(this.buscarPedido(pedido) === -1){
+    this._pedidos.push(pedido)
+    return "Fue registrado";
+    }
+
+    return "Ya existe el pedido"
+
+  }
+
+  buscarPedido(pedido){
+    let indice = -1; 
+
+        this._pedidos.forEach((e, i) => {
+            if(e.elementoIgual(pedido)){
+                indice = i;
+            }})
+    return indice;
+  }
+
+  eliminarPedido(pedido){
+    let indice = this.buscarPedido(pedido);
+        if (indice === -1){
+            return false;
+        }
+
+        this._pedidos.splice(indice, 1);
+        return true;
+
+  }
+
+  actualizarPedido(pedido, nuevoPedido){
+    let indice = this.buscarPedido(pedido); 
+
+        if(indice === -1){
+            return false;
+        }
+
+        this._pedidos.splice(indice,1, nuevoPedido);
+        return true;
   }
 
   registrarProductos(producto) {
-    this.productos.push(producto);
+    this._productos.push(producto);
   }
 
   listarProductos() {
-    this.productos.forEach(producto => {
+    this._productos.forEach(producto => {
       console.log(`${producto.getDescripcion()}`);
     });
   }
 
   registrarPedido(pedido) {
-    this.pedidos.push(pedido);
-  }
-
-  setPedido(pedido){
-    if(pedido != this.pedidos){
-      this.pedidos = pedido; 
-      return true; 
-    }else {
-        return false;
-    }
+    this._pedidos.push(pedido);
   }
 
   listarPedido() {
-    this.pedidos.forEach(pedido => {
+    this._pedidos.forEach(pedido => {
       console.log(`${pedido.getDescripcion()}`);
     });
   }

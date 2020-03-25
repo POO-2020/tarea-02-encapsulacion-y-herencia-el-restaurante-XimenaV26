@@ -20,23 +20,40 @@ export default class Pedido {
     this._hora = hora;
     this._cliente = cliente;
     this._numeroPedido = numeroPedido; 
-    this.elementosPedidos = new Array();
+    this._elementosPedidos = new Array();
+  }
+
+  getNumeroPedido(){
+    return(`${this._numeroPedido}`)
+  }
+
+  elementoIgual(pedido){
+    if(pedido.getNumeroPedido() === this._numeroPedido){
+      return true; 
+    }
+
+      return false;
+  }
+
+  getDescripcion(){
+    return (`${this._cliente.getNombre()}, Numero de pedido: ${this.getNumeroPedido()}`)
   }
 
   getResumen() {
-    return `${this._numeroPedido}, ${this._fecha.getFecha()} ${this._hora.getFormato12()} - ${this.getNumeroElementos()} elementos con ${this.getNumeroProductos()} productos - total: ${new Precio(
+    return `${this.getNumeroPedido()}, ${this._fecha.getFecha()} ${this._hora.getFormato12()} - ${this.getNumeroElementos()} elementos con ${this.getNumeroProductos()} productos 
+    total: ${new Precio(
       this.getCostoTotal()).getPrecio()} `;
   }
 
   getNumeroElementos() {
-    return this.elementosPedidos.length;
+    return this._elementosPedidos.length;
   }
 
   getNumeroProductos() {
     let totalProductos = 0;
 
-    this.elementosPedidos.forEach(elemento => {
-      totalProductos = totalProductos + elemento._cantidad;
+    this._elementosPedidos.forEach(elemento => {
+      totalProductos = totalProductos + elemento.getCantidad();
     });
 
     return totalProductos;
@@ -45,21 +62,22 @@ export default class Pedido {
   getCostoTotal() {
     let costoTotal = 0;
 
-    this.elementosPedidos.forEach(elemento => {
+    this._elementosPedidos.forEach(elemento => {
       costoTotal =
-        costoTotal + elemento._cantidad * elemento._producto._precio._valor;
+        costoTotal + elemento.getCantidad() * elemento.getPrecioElemento()
     });
 
     return costoTotal;
   }
 
   agregarElemento(elemento) {
-    this.elementosPedidos.push(elemento);
+    this._elementosPedidos.push(elemento);
   }
 
   listarElementos() {
-    this.elementosPedidos.forEach(elemento => {
+    this._elementosPedidos.forEach(elemento => {
       console.log(elemento.getDescripcion());
     });
   }
 }
+

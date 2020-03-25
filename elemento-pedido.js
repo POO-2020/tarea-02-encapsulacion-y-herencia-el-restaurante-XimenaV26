@@ -12,8 +12,20 @@ export default class ElementoPedido {
     this._producto = producto;
   }
 
+  getPrecioElemento(){
+    return(`${this._producto.getPrecioProducto()}`)
+  }
+
+  getCostoTotal(){
+    return this._cantidad * this.getPrecioElemento()
+  }
+
+  getCantidad(){
+    return(`${this._cantidad}`)
+  }
+
   getDescripcion() {
-    let costoTotal = new Precio(this._cantidad * this._producto._precio._valor);
-    return `${this._cantidad} x ${this._producto._nombre} ${costoTotal.getPrecio()}`;
+    let costoTotal = new Precio(this.getCostoTotal());
+    return `${this._cantidad} x ${this._producto.getNombreProducto()} ${costoTotal.getPrecio()}`;
   }
 }
